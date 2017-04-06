@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    cardView:cardBackgroundColor="@color/cardview_light_background"
+    cardView:cardCornerRadius="25dp"
+    cardView:cardElevation="5dp"
+    android:layout_margin="@dimen/cardview_compat_inset_shadow">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin">
+
+        <ToggleButton
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/suspend_toggle_button"
+            android:checked="true"
+            android:textOn="接单"
+            android:textOff="已接单"
+            android:textColor="@android:color/white"
+            android:id="@+id/card_solve"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="客户名"
+            android:gravity="center|left"
+            android:layout_toStartOf="@id/card_solve"
+            android:textSize="20sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:id="@+id/card_customer_name"
+            android:layout_alignBottom="@id/card_solve"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_customer_name"
+            android:layout_marginTop="10dp"
+            android:layout_alignEnd="@id/card_customer_name"
+            android:id="@+id/card_list"/>
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="20000"
+            android:textColor="@color/red"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/card_list"
+            android:layout_marginTop="10dp"
+            android:id="@+id/card_price"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="合计："
+            android:gravity="end"
+            android:layout_alignBaseline="@id/card_price"
+            android:layout_toStartOf="@id/card_price"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_below="@id/card_price"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/card_date"/>
+
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

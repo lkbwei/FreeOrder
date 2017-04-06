@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+    <TextView
+        android:text="@string/user"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/user"
+        tools:text="@string/user"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text=""
+        android:ems="7"
+        android:id="@+id/register_name"
+        tools:text="Name"
+        android:layout_alignBaseline="@+id/user"
+        android:layout_alignBottom="@+id/user"
+        android:layout_toRightOf="@+id/user"
+        android:layout_toEndOf="@+id/user"
+        android:layout_marginRight="25dp"/>
+
+    <TextView
+        android:text="(3~12位)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/user"
+        android:layout_toEndOf="@+id/register_password"/>
+
+    <TextView
+        android:text="@string/password"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        tools:text="@string/password"
+        android:layout_below="@+id/register_name"
+        android:layout_alignStart="@+id/user"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="25dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="7"
+        android:id="@+id/register_password"
+        tools:text="Password"
+        android:maxLength="12"
+        android:layout_alignBaseline="@+id/password"
+        android:layout_alignBottom="@+id/password"
+        android:layout_toRightOf="@+id/password"
+        android:layout_toEndOf="@+id/password"/>
+
+    <TextView
+        android:text="(8~12位)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/register_password"
+        android:layout_toRightOf="@+id/register_password"
+        android:layout_toEndOf="@+id/register_password"
+        android:layout_alignBaseline="@+id/password"
+        android:layout_alignTop="@+id/password"/>
+
+
+
+</RelativeLayout>

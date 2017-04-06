@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/user"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/user"
+        tools:text="@string/user"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="170dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text=""
+        android:ems="8"
+        android:id="@+id/login_name"
+        tools:text="Name"
+        android:layout_alignBaseline="@+id/user"
+        android:layout_alignBottom="@+id/user"
+        android:layout_toRightOf="@+id/user"
+        android:layout_toEndOf="@+id/user"/>
+
+    <TextView
+        android:text="@string/password"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        tools:text="@string/password"
+        android:layout_below="@+id/login_name"
+        android:layout_alignLeft="@+id/user"
+        android:layout_alignStart="@+id/user"
+        android:layout_marginTop="48dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="8"
+        android:id="@+id/login_password"
+        tools:text="Password"
+        android:layout_alignBaseline="@+id/password"
+        android:layout_alignBottom="@+id/password"
+        android:layout_toRightOf="@+id/password"
+        android:layout_toEndOf="@+id/password"/>
+    <TextView
+        android:text="@string/register"
+        tools:text="@string/register"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_password"
+        android:layout_alignRight="@+id/login_password"
+        android:layout_alignEnd="@+id/login_password"
+        android:layout_marginTop="7dp"
+        android:id="@+id/register"
+        android:clickable="true"/>
+
+    <Button
+        android:text="@string/boss_login"
+        android:elevation="5dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/login_button_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register"
+        android:layout_alignEnd="@id/login_password"
+        android:layout_alignStart="@+id/password"
+        android:layout_marginTop="29dp"
+        android:id="@+id/boss_login"/>
+
+    <Button
+        android:text="@string/customer_login"
+        android:elevation="5dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/login_button_boss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/boss_login"
+        android:layout_alignStart="@id/boss_login"
+        android:layout_alignEnd="@id/boss_login"
+        android:layout_marginTop="20dp"
+        android:id="@+id/customer_login"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:src="@drawable/tab_image_down"
+        android:layout_below="@id/customer_login"
+        android:layout_alignStart="@id/customer_login"
+        android:id="@+id/oval_animator"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
+

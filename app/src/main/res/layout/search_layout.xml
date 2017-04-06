@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@android:drawable/screen_background_light_transparent">
+
+    <AutoCompleteTextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:id="@+id/autoCompleteTextView"
+        android:textCursorDrawable="@color/colorAccent"
+        android:hint="搜一下"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        android:completionHint="符合您的餐厅"
+        style="@style/Widget.AppCompat.Light.AutoCompleteTextView"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/ic_search_blue"
+        android:layout_toEndOf="@id/autoCompleteTextView"
+        android:layout_alignBottom="@id/autoCompleteTextView"
+        android:id="@+id/search_restaurant"/>
+</RelativeLayout>

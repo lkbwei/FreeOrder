@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tabstyle="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="38dp"
+            android:id="@+id/spinner_image"
+            android:background="@android:drawable/ic_menu_edit"
+            android:layout_alignParentEnd="true"/>
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_height"
+            android:id="@+id/viewpager"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+            <android.support.design.widget.TabLayout
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_gravity="bottom|center"
+                android:id="@+id/tablayout"
+                tabstyle:tabGravity="center"
+                tabstyle:tabMaxWidth="20dp"
+                tabstyle:tabIndicatorHeight="3dp"
+                tabstyle:tabIndicatorColor="@android:color/holo_blue_bright"/>
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:gravity="bottom"
+            android:dropDownWidth="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+        </Spinner>
+
+        <Button
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/edit_button"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/ic_edit"
+            android:transitionName="share"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/menu_recycler_view">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/description_add_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+
+            tabstyle:srcCompat="@drawable/ic_list_add"
+            android:layout_marginRight="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

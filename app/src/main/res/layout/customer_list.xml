@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tabstyle="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_height"
+            android:id="@+id/viewpager"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+            <android.support.design.widget.TabLayout
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_gravity="bottom|center"
+                android:id="@+id/tablayout"
+                tabstyle:tabGravity="center"
+                tabstyle:tabMaxWidth="20dp"
+                tabstyle:tabIndicatorHeight="3dp"
+                tabstyle:tabIndicatorColor="@android:color/holo_blue_bright"/>
+        </android.support.v4.view.ViewPager>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ovalshape">
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_search_blue"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/transparent"
+                android:id="@+id/search_button"
+                android:layout_marginStart="5dp"
+                android:layout_alignParentStart="true"/>
+
+            <AutoCompleteTextView
+                android:text="AutoCompleteTextView"
+                android:textColor="@color/colorAccent"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingTop="2dp"
+                android:background="@null"
+                android:textSize="15sp"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:id="@+id/autoCompleteTextView"
+                android:layout_toEndOf="@+id/search_button"
+                style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+                android:cursorVisible="false"/>
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner"
+            android:gravity="bottom"
+            android:dropDownWidth="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            >
+        </Spinner>
+
+        <ToggleButton
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:textOff=""
+            android:textOn=""
+            android:id="@+id/volume_select"
+            android:background="@drawable/sale_select"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            />
+
+        <ToggleButton
+            android:layout_width="45dp"
+            android:checked="false"
+            android:layout_height="match_parent"
+            android:textOff=""
+            android:textOn=""
+            android:id="@+id/price_select"
+            android:background="@drawable/price_select"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/menu_recycler_view"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:elevation="10dp"
+            android:id="@+id/linear">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/order_recyclerview"
+                android:visibility="gone">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:text="合计"
+                android:textSize="18sp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/order_price"
+                android:visibility="gone"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/description_add_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tabstyle:srcCompat="@drawable/basket"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+
+

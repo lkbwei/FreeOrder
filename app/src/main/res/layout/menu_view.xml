@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.lkbwei.freeOrder.Tools.MenuItemView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="wrap_content">
+
+    <TextView
+        tools:text="菜名"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_marginEnd="@dimen/delete_button_width"
+        android:id="@+id/name"/>
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:background= "@android:drawable/ic_menu_help"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        tools:text="15.5"
+        android:textColor="@color/red"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/price"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"/>
+
+    <TextView
+        android:text="¥"
+        android:textSize="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:textColor="@color/red"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_alignBaseline="@id/price"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        android:paddingTop="5dp"/>
+
+    <TextView
+        android:text="销量"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        android:id="@+id/sale_num"/>
+
+    <TextView
+        tools:text="1000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/sale_num"
+        android:layout_toEndOf="@+id/sale_num"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/num"
+        android:layout_alignTop="@+id/sale_num"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_good"
+        android:id="@+id/good"
+        android:layout_alignTop="@+id/num"
+        android:layout_toRightOf="@+id/num"
+        android:layout_toEndOf="@+id/num"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignBottom="@+id/num"/>
+
+    <TextView
+        tools:text="1000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/good"
+        android:layout_toRightOf="@+id/good"
+        android:layout_toEndOf="@+id/good"
+        android:id="@+id/good_num"
+        android:layout_alignBottom="@+id/good"/>
+
+    <Button
+        android:background="@drawable/order_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignEnd="@id/name"
+
+        android:layout_marginEnd="10dp"
+        android:layout_alignBottom="@id/num"
+        android:id="@+id/add_button"/>
+
+    <TextView
+        android:text="缺货"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/add_button"
+        android:layout_toStartOf="@+id/add_button"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="11dp"
+        android:id="@+id/stock"/>
+
+    <Button
+        android:layout_width="@dimen/delete_button_width"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/add_button"
+        android:layout_alignTop="@id/name"
+        android:layout_alignParentEnd="true"
+        android:background="@color/red"
+        android:text="删除"
+        android:textSize="17sp"
+        android:textColor="@android:color/white"
+        android:id="@+id/menu_delete"/>
+
+
+</com.example.lkbwei.freeOrder.Tools.MenuItemView>

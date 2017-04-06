@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    cardView:cardBackgroundColor="@color/cardview_light_background"
+    cardView:cardCornerRadius="25dp"
+    cardView:cardElevation="5dp"
+    android:layout_margin="@dimen/cardview_compat_inset_shadow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="foodname"
+            android:gravity="center|left"
+            android:layout_toStartOf="@id/card_solve"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:id="@+id/evaluate_food_name"
+            android:layout_alignBottom="@id/evaluate_submit"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textSize="18sp"
+            android:textColor="@color/red"
+            android:layout_below="@id/evaluate_food_name"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:id="@+id/card_unit"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/evaluate_food_name"
+            android:layout_toRightOf="@id/card_unit"
+            android:layout_alignBaseline="@id/card_unit"
+            android:textSize="23sp"
+            android:textColor="@color/red"
+            android:layout_marginStart="5dp"
+            android:text="15.5"
+            android:id="@+id/card_price"/>
+
+        <TextView
+            android:text="我的评价......"
+            android:textSize="15sp"
+            android:textColor="@android:color/tertiary_text_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_unit"
+            android:layout_marginTop="15dp"
+            android:id="@+id/evaluate_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/restaurant"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/evaluate_content"
+            android:gravity="end"
+            android:text="餐厅"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/restaurant"
+            android:gravity="end"
+            android:text="2017.3.16"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

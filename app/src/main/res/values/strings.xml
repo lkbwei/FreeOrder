@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">自在点餐</string>
+
+    <string name="user">用户名：</string>
+    <string name="password">密码：</string>
+    <string name="boss_login">商家登录</string>
+    <string name="customer_login">客户登录</string>
+    <string name="register">注册</string>
+    <string name="evaluate_tip">我的评论...</string>
+
+
+</resources>

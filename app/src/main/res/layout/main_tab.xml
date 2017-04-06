@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <android.support.v4.app.FragmentTabHost
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tab_host">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@android:id/tabcontent"
+                android:layout_above="@android:id/tabs">
+            </FrameLayout>
+            <TabWidget
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@android:id/tabs"
+                android:tabStripEnabled="false"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="1dp">
+            </TabWidget>
+        </RelativeLayout>
+    </android.support.v4.app.FragmentTabHost>
+
+    <FrameLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/second_id"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:layout_gravity="center"
+        android:elevation="20dp">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="330dp"
+        android:layout_height="550dp"
+        android:id="@+id/third_id"
+        android:elevation="50dp"
+        android:layout_gravity="center">
+    </FrameLayout>
+
+</FrameLayout>
