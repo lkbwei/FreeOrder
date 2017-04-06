@@ -40,6 +40,7 @@ public class LoginActivity extends BaseLoginActivity{
     public static final int BOSSLOGIN = 7;
     public static final int CHOOSE_RESTAURANT = 8;
     public static final int GET_BOSS = 9;
+    public static final int NET_ON = 10;
 
     private List<String> mRestaurantList;
     private LoginPresenter mLoginPresenter;
@@ -200,6 +201,10 @@ public class LoginActivity extends BaseLoginActivity{
                         mLoginPresenter.saveBeforeLogin(data.getUserName(),CUSTOMER);
                         mDialog.cancel();
                         break;
+                    case NET_ON:
+                        if (fragment instanceof WelcomeFragment){
+                            ((WelcomeFragment) fragment).getUserImage();
+                        }
                     default:
                         break;
                 }

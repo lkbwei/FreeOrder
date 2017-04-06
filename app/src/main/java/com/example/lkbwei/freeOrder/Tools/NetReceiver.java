@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Handler;
 import android.util.Log;
 
+import com.example.lkbwei.freeOrder.Login.BaseLoginActivity;
 import com.example.lkbwei.freeOrder.Login.LoginActivity;
 
 /**
@@ -33,8 +34,7 @@ public class NetReceiver extends BroadcastReceiver {
         if ( activeNetInfo != null ) {
             if (activeNetInfo.isConnected()) {
                 if (mHandler != null) {
-                    Log.i("receiver123","has");
-                    mHandler.sendEmptyMessage(LoginActivity.LOGIN);
+                    mHandler.sendEmptyMessage(LoginActivity.NET_ON);
                 }
             }
         }
@@ -59,6 +59,7 @@ public class NetReceiver extends BroadcastReceiver {
         }
 
         return false;
+
     }
 
 }

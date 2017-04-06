@@ -64,7 +64,6 @@ public class WelcomeFragment extends Fragment {
         initHandler();
         initUserName();
 
-
         progressBar= new UseProgressBar(view);
         final boolean conn = NetReceiver.checkNetConn(getActivity());
 

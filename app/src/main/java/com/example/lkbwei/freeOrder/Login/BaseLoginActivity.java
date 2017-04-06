@@ -2,6 +2,7 @@ package com.example.lkbwei.freeOrder.Login;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -23,9 +24,11 @@ public abstract class BaseLoginActivity extends AppCompatActivity implements Log
     public static final int BOSS = 1;
     public static final int CUSTOMER = 2;
 
+
     private boolean hasLogined;
     private FragmentManager mFragmentManager;
     public Handler mHandler;
+    protected Fragment fragment;
 
 
     @Override
@@ -44,7 +47,7 @@ public abstract class BaseLoginActivity extends AppCompatActivity implements Log
         hasLogined = BasePreferences.getLoginStatus(this);
 
         mFragmentManager = getSupportFragmentManager();
-        Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
+        fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
         if(fragment == null){
             fragment = createFragment(hasLogined);
             mFragmentManager.beginTransaction()
@@ -57,11 +60,13 @@ public abstract class BaseLoginActivity extends AppCompatActivity implements Log
                     .commit();
         }
 
+        if(hasLogined){
+            initReceiver();
+        }
     }
 
     private Fragment createFragment(boolean bool){
         if(bool){
-            initReceiver();
             return WelcomeFragment.newInstance();
         }else {
            return LoginFragment.newInstance();
