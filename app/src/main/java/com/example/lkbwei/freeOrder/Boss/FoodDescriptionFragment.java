@@ -157,7 +157,7 @@ public class FoodDescriptionFragment extends Fragment {
             description.setTextSize(15);
             mClassifySpinner.setEnabled(false);
             editImage.setVisibility(View.GONE);
-
+            saveFab.setVisibility(View.GONE);
         }
 
         doEditImage();

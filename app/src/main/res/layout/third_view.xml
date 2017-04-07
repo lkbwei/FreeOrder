@@ -17,7 +17,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
             android:id="@+id/third_image"
-            android:src="@drawable/empty_image"/>
+            android:src="@drawable/tmp"/>
 
         <TextView
             android:layout_width="match_parent"

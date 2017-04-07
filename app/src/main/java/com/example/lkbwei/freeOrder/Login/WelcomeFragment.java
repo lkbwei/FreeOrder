@@ -29,6 +29,7 @@ public class WelcomeFragment extends Fragment {
     private ImageView mUserImageView;
     private TextView mUserName;
     private UseProgressBar progressBar;
+    private boolean haveGetImage;
 
     private static final int GET_IMAGE = 0;
 
@@ -58,7 +59,7 @@ public class WelcomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.first_view,container,false);
+        View view = inflater.inflate(R.layout.welcome_view,container,false);
         mUserImageView = (ImageView)view.findViewById(R.id.head_image);
         mUserName = (TextView)view.findViewById(R.id.user_name);
         initHandler();
@@ -74,6 +75,7 @@ public class WelcomeFragment extends Fragment {
 
                 if (conn){
                     getUserImage();
+                    setHaveGetImage(true);
                 }else {
                     Toast.makeText(getActivity(),"无可用网络",Toast.LENGTH_LONG).show();
 
@@ -86,8 +88,10 @@ public class WelcomeFragment extends Fragment {
     }
 
     public void getUserImage(){
-        DbOperate.getUserImage(BasePreferences.getUserName(getActivity()),
-                mHandler,GET_IMAGE);
+        if (!haveGetImage) {
+            DbOperate.getUserImage(BasePreferences.getUserName(getActivity()),
+                    mHandler, GET_IMAGE);
+        }
     }
 
     public void updateImageFromNet(String url){
@@ -107,6 +111,10 @@ public class WelcomeFragment extends Fragment {
     public void initUserName(){
         String name = BasePreferences.getUserName(getActivity());
         mUserName.setText(name);
+    }
+
+    public void setHaveGetImage(boolean bool){
+        haveGetImage = bool;
     }
 
     public void initHandler(){

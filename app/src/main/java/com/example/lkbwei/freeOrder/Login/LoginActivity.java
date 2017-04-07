@@ -204,6 +204,7 @@ public class LoginActivity extends BaseLoginActivity{
                     case NET_ON:
                         if (fragment instanceof WelcomeFragment){
                             ((WelcomeFragment) fragment).getUserImage();
+                            ((WelcomeFragment) fragment).setHaveGetImage(true);
                         }
                     default:
                         break;
