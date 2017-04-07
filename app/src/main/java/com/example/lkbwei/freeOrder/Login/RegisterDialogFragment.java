@@ -12,25 +12,40 @@ import android.widget.EditText;
 import com.example.lkbwei.freeOrder.R;
 
 /**
+ * 注册界面实现
  * Created by lkbwei on 2017/3/4.
  */
 
 public class RegisterDialogFragment extends DialogFragment {
+
     private EditText user;
     private EditText pwd;
-    private DoRegisterListener mRegisterListener;
-
     private static final int BOSS = 1;
     private static final int CUSTOMER = 2;
 
+    /**
+     * 注册窗口弹出监听器，具体由Activity实现
+     * @since 1.0
+     */
     public RegisterDialogFragment(){
 
     }
 
+    /**
+     * 注册验证监听器，具体由Activity实现
+     * @since 1.0
+     */
     public interface DoRegisterListener{
         void doRegister(String user, String pwd, int identity);
     }
 
+    /**
+     * 注册窗口
+     * 创建注册窗口
+     * @param savedInstanceState 数据记录
+     * @return 窗口
+     * @since 1.0
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

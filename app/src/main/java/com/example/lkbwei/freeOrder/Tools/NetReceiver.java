@@ -27,6 +27,12 @@ public class NetReceiver extends BroadcastReceiver {
         mHandler = handler;
     }
 
+    /**
+     * 监听网络变化
+     * @param context 上下文
+     * @param intent Intent
+     * @since 1.0
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -40,6 +46,12 @@ public class NetReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * 检测网络状态
+     * @param context 上下文
+     * @return 是否有可用网络
+     * @since 1.0
+     */
     public static boolean checkNetConn(Context context){
         ConnectivityManager manager = (ConnectivityManager)context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);

@@ -41,6 +41,11 @@ public class PollService extends Service {
         return START_STICKY;
     }
 
+    /**
+     * 监听是否有新订单
+     * @param intent Intent
+     * @since 1.0
+     */
     private void doMyJob(Intent intent){
         thread = new Thread(){
             @Override
@@ -89,6 +94,13 @@ public class PollService extends Service {
         Log.i("DESTROY","已销毁");
     }
 
+    /**
+     * 创建通知
+     * @param context 上下文
+     * @param title 标题
+     * @param content 内容
+     * @since 1.0
+     */
     public void createNotification(Context context,String title,String content){
         Intent intent = new Intent(context, LoginActivity.class);
         PendingIntent pi = PendingIntent.getActivity(context,0,intent,0);
@@ -104,28 +116,6 @@ public class PollService extends Service {
         notificationManager.notify(0,notification);
 
     }
-
-
-//    public static boolean isServiceAlarmOn(Context context){
-//        Intent i = PollService.newIntent(context);
-//        PendingIntent pi = PendingIntent.getService(context,0,i,PendingIntent.FLAG_NO_CREATE);
-//        return pi != null;
-//    }
-//
-//    public static void startServiceAlarm(Context context,boolean isOn){
-//        Intent i = PollService.newIntent(context);
-//        PendingIntent pi = PendingIntent.getService(context,0,i,0);
-//
-//        AlarmManager alarmManager = (AlarmManager)context.getSystemService(ALARM_SERVICE);
-//
-//        if (isOn){
-//            alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
-//                    SystemClock.elapsedRealtime(),POLL_INTERVAL,pi);
-//        }else {
-//            alarmManager.cancel(pi);
-//            pi.cancel();
-//        }
-//    }
 
     @Nullable
     @Override

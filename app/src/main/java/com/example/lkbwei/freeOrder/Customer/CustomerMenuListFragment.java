@@ -50,6 +50,20 @@ import java.util.Set;
  */
 
 public class CustomerMenuListFragment extends MenuListFragment {
+
+    public static String restaurant;
+    public static Handler privateHandler;
+    public static final int UP_OR_DOWN = 0;
+    public static final int ADD_ANIMATION = 1;
+    public static final int ADD = 2;
+    public static final int GET_RESTAURANT = 3;
+    public static final int GET_RESTAURANTlIST = 5;
+    public static final int UPDATE_RESTAURANT = 4;
+    public static final String PRICE_SELECT = "Price";
+    public static final String VOLUME_SELECT = "SaleVolume";
+    public static int PRICE_IS = 0;
+    public static int VOLUME_IS = 0;
+
     private ToggleButton mPriceSelect;
     private ToggleButton mSaleSelect;
     private RecyclerView mOrderRecyclerView;
@@ -60,25 +74,7 @@ public class CustomerMenuListFragment extends MenuListFragment {
     private AutoCompleteTextView mAutoCompleteTextView;
     private ArrayAdapter<String> mAutoAdapter;
     private List<String> restaurantList;
-
     private boolean hasOpen = false;
-    public static String restaurant;
-
-
-    public static Handler privateHandler;
-
-    public static final int UP_OR_DOWN = 0;
-    public static final int ADD_ANIMATION = 1;
-    public static final int ADD = 2;
-    public static final int GET_RESTAURANT = 3;
-    public static final int GET_RESTAURANTlIST = 5;
-    public static final int UPDATE_RESTAURANT = 4;
-
-    public static final String PRICE_SELECT = "Price";
-    public static final String VOLUME_SELECT = "SaleVolume";
-
-    public static int PRICE_IS = 0;
-    public static int VOLUME_IS = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,
@@ -191,10 +187,18 @@ public class CustomerMenuListFragment extends MenuListFragment {
     }
 
 
+    /**
+     * 获取餐厅列表
+     * @since 1.0
+     */
     public void getRestaurantList(){
         DbOperate.getAllRestaurant(privateHandler,GET_RESTAURANTlIST);
     }
 
+    /**
+     * 初始化AutoCompleteTextView，并设置监听
+     * @since 1.0
+     */
     public void initAutoCompleteTextView(){
 
         mAutoAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line,
@@ -224,7 +228,13 @@ public class CustomerMenuListFragment extends MenuListFragment {
 
     }
 
-
+    /**
+     * 验证餐厅是否存在
+     * @param list 所有餐厅列表
+     * @param restaurant 当前选择餐厅
+     * @return 是否存在
+     * @since 1.0
+     */
     public boolean checkRestaurant(List<String> list,String restaurant){
         if (list.contains(restaurant)){
             return true;
@@ -234,10 +244,18 @@ public class CustomerMenuListFragment extends MenuListFragment {
         }
     }
 
+    /**
+     * 获取当前餐厅
+     * @since 1.0
+     */
     public void getRestaurant(){
         DbOperate.getRestaurant(BasePreferences.getRecentRestaurant(getActivity()),privateHandler,GET_RESTAURANT);
     }
 
+    /**
+     * 动画
+     * @since 1.0
+     */
     public void addOneAnimation(){
         ObjectAnimator animator1 = ObjectAnimator.ofFloat(
                 mFab,
@@ -260,6 +278,10 @@ public class CustomerMenuListFragment extends MenuListFragment {
         set.start();
     }
 
+    /**
+     * 打开购物车按钮操作
+     * @since 1.0
+     */
     public void openOrderList(){
         hasOpen = true;
         float price = 0;
@@ -291,6 +313,10 @@ public class CustomerMenuListFragment extends MenuListFragment {
 
     }
 
+    /**
+     * 关闭购物车按钮操作
+     * @since 1.0
+     */
     public void closeOrderList(){
         hasOpen = false;
         ObjectAnimator animator = ObjectAnimator.ofFloat(
@@ -318,6 +344,12 @@ public class CustomerMenuListFragment extends MenuListFragment {
         set.start();
     }
 
+    /**
+     * 添加订单操作
+     * @param name 食品名
+     * @param price 价格
+     * @since 1.0
+     */
     public void addOrderData(String name,String price){
         OrderItem item = new OrderItem();
         item.setName(name);
@@ -327,12 +359,20 @@ public class CustomerMenuListFragment extends MenuListFragment {
         BaseMenuActivity.sHandler.obtainMessage(BaseMenuActivity.SAVE_ORDER_LIST,mOrderList).sendToTarget();
     }
 
+    /**
+     * 加载数据
+     * @since 1.0
+     */
     @Override
     public void loadData(){
         sLab.getGoodsList(new String[]{"User","classify"},new Object[]{currentRestaurant,mCurrentClassify},
                 VOLUME_SELECT,VOLUME_IS,PRICE_SELECT,PRICE_IS,sHandler,LOADDATA);
     }
 
+    /**
+     * 点赞操作
+     * @since 1.0
+     */
     public void upOrDownSelect(){
         sLab.getGoodsList(new String[]{"User","classify"},new Object[]{currentRestaurant,mCurrentClassify},
                 VOLUME_SELECT,VOLUME_IS,PRICE_SELECT,PRICE_IS, privateHandler,UP_OR_DOWN);
@@ -375,6 +415,11 @@ public class CustomerMenuListFragment extends MenuListFragment {
         };
     }
 
+    /**
+     * 重新选择餐厅
+     * @param boss 商家名
+     * @since 1.0
+     */
     public void reSetRestaurant(String boss){
         BasePreferences.setRecentRestaurant(getActivity(),boss);
         currentRestaurant = boss;

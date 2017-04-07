@@ -47,19 +47,14 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class MenuListFragment extends Fragment {
-    private static final String TAG = "MenuListFragment";
 
     public static List<GoodsData> mCoverDatas;//封面数据
     public static List<GoodsData> mCurrentClassifyDatas;//当前页面所选类型的数据
+    public static List<String> classify = new ArrayList<>();
     public static Lab sLab;
     public static String currentRestaurant;//保存的是商家的名字，不是餐厅名
-    protected ProgressDialog mDialog;
-    protected String mCurrentClassify;
-
     public static final int TIME = 2000;
     public static ViewPager mViewPager;
-    private static int pagerNum;
-
     public static final int IMAGE_CUT_CODE = 0;
     public static final int CAMERA_CODE = 1;
     public static final int IMAGE_CUT_CAMERA_CODE = 2;
@@ -73,21 +68,24 @@ public class MenuListFragment extends Fragment {
     public static final int OPEN_NOT_COVER_DESCRIPTION = 10;
     public static final int UPDATE_DATA = 11;
     public static final int CLICK_COVER = 12;
-
     public static Handler sHandler;
+
+    protected ProgressDialog mDialog;
+    protected String mCurrentClassify;
     protected Spinner mSpinner;
     protected FloatingActionButton mFab;
-    private Button mCoverButton;
-    public static List<String> classify = new ArrayList<>();
     protected ArrayAdapter<String> mClassifyArrayAdapter;
     protected RecyclerView mRecyclerView;
     protected MenuRecyclerViewAdapter mRecyclerAdapter;
+
+    private static int pagerNum;
+    private static final String TAG = "MenuListFragment";
+    private Button mCoverButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
-
 
 
     @Override
@@ -111,11 +109,10 @@ public class MenuListFragment extends Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         mViewPager = (ViewPager)view.findViewById(R.id.viewpager);
-        TabLayout tabLayout = (TabLayout)view.findViewById(R.id.tablayout);
         mViewPager.setAdapter(new BaseFragmentPagerAdapter(getFragmentManager()));
         viewPagerChange();
 
-        mClassifyArrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, classify);
+        mClassifyArrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item, classify);
         mClassifyArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner = (Spinner)view.findViewById(R.id.spinner);
         mSpinner.setAdapter(mClassifyArrayAdapter);
@@ -123,8 +120,6 @@ public class MenuListFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mCurrentClassify = classify.get(position);
-                Log.e("loadData","**************" + mCurrentClassify);
-                Log.e("loadData","^^^^^^^^^^^^"  + currentRestaurant);
                 loadData();
             }
 
@@ -178,6 +173,10 @@ public class MenuListFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 更新UI开始
+     * @since 1.0
+     */
     public void updateUI(){
         mDialog = showProgress(getActivity(),"数据拼命加载中...");
         mDialog.show();
@@ -185,6 +184,10 @@ public class MenuListFragment extends Fragment {
 
     }
 
+    /**
+     * 初始界面数据
+     * @since 1.0
+     */
     public void initMenuFragment(){
         updateClassify();
         if (mCurrentClassify == null || !classify.contains(mCurrentClassify)) {
@@ -195,43 +198,68 @@ public class MenuListFragment extends Fragment {
         getCoverData();
     }
 
+    /**
+     * 加载当前数据
+     * @since 1.0
+     */
     public void loadData(){
        sLab.getGoodsList(new String[]{"User","classify"},new Object[]{currentRestaurant,mCurrentClassify},
                null,0,null,0, sHandler,LOADDATA);
     }
 
+    /**
+     * 使用当前数据更新
+     * @since 1.0
+     */
     public void updateCurrentData(){
         mRecyclerAdapter.setGoodsDatas(mCurrentClassifyDatas);
         mRecyclerAdapter.notifyDataSetChanged();
         mDialog.cancel();
     }
 
+    /**
+     * 获取封面数据
+     * @sicne 1.0
+     */
     public void getCoverData(){
         sLab.doConditionQuery(new String[]{"User","CoverNum"},new Object[]{currentRestaurant,-1},
                 true, sHandler,COVERDATA);
     }
 
-    public void updateCover(){
-
-    }
-
+    /**
+     * 加载分类数据
+     * @param user 商家名
+     * @since 1.0
+     */
     public void loadClassify(String user){
         sLab.getGoodsList(new String[]{"User"},new Object[]{user},
                 null,0,null,0, sHandler,LOADCLASSIGY);
     }
 
-
+    /**
+     * 更新分类数据
+     * @since 1.0
+     */
     public void updateClassify(){
         mClassifyArrayAdapter.notifyDataSetChanged();
         //getCoverData();
     }
 
+    /**
+     * 跳转非封面数据的详情界面
+     * @param position 当前选择
+     * @since 1.0
+     */
     public void openNotCoverDescription(int position){
         Intent intent = FoodPagerActivity.newIntent(getActivity(),position,false,true);
         ActivityTransitionLauncher.with(getActivity()).from(mFab).launch(intent);
         //startActivity(intent);
     }
 
+    /**
+     * 跳转封面数据的详情界面
+     * @since 1.0
+     */
     public void clickCover(){
         pagerNum = mViewPager.getCurrentItem();
         Intent intent = FoodPagerActivity.newIntent(getActivity(),pagerNum,true,false);
@@ -251,6 +279,10 @@ public class MenuListFragment extends Fragment {
         return dialog;
     }
 
+    /**
+     * ViewPager变化监听
+     * @since 1.0
+     */
     public void viewPagerChange(){
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -313,6 +345,10 @@ public class MenuListFragment extends Fragment {
         }
     }
 
+    /**
+     * 更新数据
+     * @since 1.0
+     */
     public void UpdateViewpager(){
             BaseFragmentPagerAdapter adapter =  (BaseFragmentPagerAdapter) mViewPager.getAdapter();
             adapter.notifyDataSetChanged();
@@ -348,7 +384,6 @@ public class MenuListFragment extends Fragment {
                         break;
                     case COVERDATA:
                         mCoverDatas = (List<GoodsData>)msg.obj;
-                        updateCover();
                         break;
                     case SAVE_SUCCESS:
                         if (getFragmentManager().findFragmentById(R.id.third_id) != null) {

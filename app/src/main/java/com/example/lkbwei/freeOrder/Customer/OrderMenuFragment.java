@@ -33,6 +33,12 @@ import java.util.List;
  */
 
 public class OrderMenuFragment extends Fragment {
+
+    public static final String STATUS1 = "未提交";
+    public static final String STUTUS2 = "商家未处理";
+    public static final String STATUS3 = "商家已接单";
+    public static final int SUBMIT = 0;
+
     private List<OrderItem> mList;
     private RecyclerView mRecyclerView;
     private OrderMenuAdapter mAdapter;
@@ -41,12 +47,6 @@ public class OrderMenuFragment extends Fragment {
     private OrderTableLab mOrderTableLab;
     private Lab mLab;
     private TextView emptyView;
-
-    public static final String STATUS1 = "未提交";
-    public static final String STUTUS2 = "商家未处理";
-    public static final String STATUS3 = "商家已接单";
-
-    public static final int SUBMIT = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -58,7 +58,7 @@ public class OrderMenuFragment extends Fragment {
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.order_suspend,container,false);
         initHandler();
-        mOrderTableLab = OrderTableLab.getmOrderTableLab(getActivity());
+        mOrderTableLab = OrderTableLab.getOrderTableLab(getActivity());
         mLab = Lab.getLab(getActivity());
 
         if (getActivity() instanceof BaseMenuActivity){
@@ -94,6 +94,10 @@ public class OrderMenuFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 提交订单操作
+     * @since 1.0
+     */
     public void submitOrder(){
         String[] boss = new String[mList.size()];
         String[] restarant = new String[mList.size()];
@@ -126,6 +130,10 @@ public class OrderMenuFragment extends Fragment {
 
     }
 
+    /**
+     * 提交成功反馈
+     * @since 1.0
+     */
     public void submitSuccess(){
         for (int i = 0;i < mAdapter.getItemCount();i ++){
             mAdapter.notifyItemRemoved(0);
@@ -136,10 +144,19 @@ public class OrderMenuFragment extends Fragment {
         Toast.makeText(getActivity(),"提交订单成功",Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 开启动画窗口
+     * @since 1.0
+     */
     public void startDialog(){
         OvalProgress.startAnimator(getActivity());
     }
 
+    /**
+     * 设置动画
+     * @param v 视图
+     * @since 1.0
+     */
     public void startAnimation(View v){
         ObjectAnimator animator = ObjectAnimator.ofFloat(
                 v,

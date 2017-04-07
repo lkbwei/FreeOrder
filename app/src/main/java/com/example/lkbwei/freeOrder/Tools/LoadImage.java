@@ -16,6 +16,12 @@ import java.io.File;
 
 public class LoadImage  {
 
+    /**
+     * 获取存储临时图片的本地地址
+     * @param context 上下文
+     * @return Uri
+     * @since 1.0
+     */
     public static Uri getTempFileDir(Context context){
         File file = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);//temp file
         File tempFile = new File(file,"temp.jpg");
@@ -23,6 +29,12 @@ public class LoadImage  {
         return Uri.fromFile(tempFile);
     }
 
+    /**
+     * 获取存储头像图片的本地地址
+     * @param context 上下文
+     * @return Uri
+     * @since 1.0
+     */
     public static Uri getUserImage(Context context){
         File file = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File tempFile = new File(file,"my.jpg");
@@ -30,17 +42,37 @@ public class LoadImage  {
         return Uri.fromFile(tempFile);
     }
 
+    /**
+     * 获取存储头像图片的本地File
+     * @param context 上下文
+     * @return Uri
+     * @since 1.0
+     */
     public static File getUserImageFile(Context context){
         File file = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         return new File(file,"my.jpg");
     }
 
+    /**
+     * 获取存储临时图片的本地地址String
+     * @param context 上下文
+     * @return Uri
+     * @since 1.0
+     */
     public static String getImageFileString(Context context){
         File file = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);//temp file
         File tempFile = new File(file,"temp.jpg");
         return tempFile.getPath();
     }
 
+    /**
+     * 创建跳转Intent
+     * @param context 上下文
+     * @param view 视图
+     * @param uri Uri
+     * @return Intent
+     * @since 1.0
+     */
     public static Intent getImage(Context context, View view,Uri uri){
         Uri temp = uri;
 
@@ -62,7 +94,12 @@ public class LoadImage  {
         return intent;
     }
 
-
+    /**
+     * 创建跳转相机Intent
+     * @param context 上下文
+     * @return Intent
+     * @since 1.0
+     */
     public static Intent openCamera(Context context){
         Uri temp = getTempFileDir(context);
 
@@ -72,6 +109,14 @@ public class LoadImage  {
         return intent;
     }
 
+    /**
+     * 创建跳转Intent
+     * @param context 上下文
+     * @param view 视图
+     * @param imageUri Uri
+     * @return Intent
+     * @since 1.0
+     */
     public static Intent getFromCamera(Context context,View view,Uri imageUri){
         Uri uri = imageUri;
 

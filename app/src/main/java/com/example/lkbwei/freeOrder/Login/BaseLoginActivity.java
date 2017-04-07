@@ -13,23 +13,22 @@ import com.example.lkbwei.freeOrder.R;
 import cn.bmob.v3.Bmob;
 
 /**
+ * 登录基函数
  * Created by lkbwei on 2017/3/2.
  */
 
 public abstract class BaseLoginActivity extends AppCompatActivity implements LoginFragment.LoginListener,LoginFragment.RegisterListener
         ,RegisterDialogFragment.DoRegisterListener,WelcomeFragment.WelcomeListener {
 
-    private String bmob_key = "c71917f4484a697fe557906d66522454";
-
+    public Handler mHandler;
     public static final int BOSS = 1;
     public static final int CUSTOMER = 2;
 
+    protected Fragment fragment;
 
     private boolean hasLogined;
     private FragmentManager mFragmentManager;
-    public Handler mHandler;
-    protected Fragment fragment;
-
+    private String bmob_key = "c71917f4484a697fe557906d66522454";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -42,7 +41,11 @@ public abstract class BaseLoginActivity extends AppCompatActivity implements Log
         initFragment();
     }
 
-
+    /**
+     * 选择界面
+     * 根据用户登录历史，选择登录界面还是免登录界面
+     * @since 1.0
+     */
     private void initFragment(){
         hasLogined = BasePreferences.getLoginStatus(this);
 
@@ -65,6 +68,13 @@ public abstract class BaseLoginActivity extends AppCompatActivity implements Log
         }
     }
 
+    /**
+     * 选择Fragment
+     * 返回WelcomeFragment或者LoginFragment
+     * @param bool 是否已经登录
+     * @return 返回WelcomeFragment或者LoginFragment
+     * @since 1.0
+     */
     private Fragment createFragment(boolean bool){
         if(bool){
             return WelcomeFragment.newInstance();

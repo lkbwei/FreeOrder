@@ -28,6 +28,10 @@ import java.util.List;
  */
 
 public class AllOrderFragment extends Fragment {
+
+    public static final String TAG = "AllOrderFragment";
+    public static final int UPDATE_DATA = 0;
+
     private List<HistoryItem> mList;
     private String boss;
     private String customer;
@@ -37,9 +41,6 @@ public class AllOrderFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private TextView mTip;
 
-    public static final String TAG = "AllOrderFragment";
-
-    public static final int UPDATE_DATA = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -56,7 +57,7 @@ public class AllOrderFragment extends Fragment {
         mTip = (TextView)view.findViewById(R.id.text_tip);
         mTip.setText("我的足迹");
         initHandler();
-        mOrderTableLab = OrderTableLab.getmOrderTableLab(getActivity());
+        mOrderTableLab = OrderTableLab.getOrderTableLab(getActivity());
 
         getData();
 
@@ -71,11 +72,20 @@ public class AllOrderFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 获取历史数据
+     * @since 1.0
+     */
     public void getData(){
         OvalProgress.startAnimator(getActivity());
         mOrderTableLab.getAllOrder(customer,mHandler,UPDATE_DATA);
     }
 
+    /**
+     * 更新界面
+     * @param list 界面数据
+     * @since 1.0
+     */
     public void updateData(List<OrderTable> list){
         List<HistoryItem> bossList = new ArrayList<>();
         for (int i = 0;i < list.size();i ++){

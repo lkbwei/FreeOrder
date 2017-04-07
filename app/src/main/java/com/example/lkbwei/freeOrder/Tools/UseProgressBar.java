@@ -26,7 +26,7 @@ public class UseProgressBar {
     private LayoutInflater inflater;
 
     public UseProgressBar(View view){
-        //inflater = LayoutInflater.from(context);
+
         mView = view.findViewById(R.id.include);
         mProgressBar = (android.widget.ProgressBar)mView.findViewById(R.id.progress_bar);
         mTextView = (TextView)mView.findViewById(R.id.progress_bar_text);
@@ -35,7 +35,7 @@ public class UseProgressBar {
         start();
     }
 
-    public void start(){
+    private void start(){
         mTextView.setAlpha(0);
         mImage.setVisibility(View.INVISIBLE);
     }

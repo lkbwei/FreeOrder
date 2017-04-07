@@ -29,18 +29,22 @@ import cn.bmob.v3.listener.UploadFileListener;
  */
 
 public class Lab {
-    private static Lab sLab;
-    private List<GoodsData> mGoodsList;
-
 
     public static final String TAG = "BMOB";
 
+    private static Lab sLab;
     private Context mContext;
-
     private Lab(Context context){
          mContext = context.getApplicationContext();
     }
 
+    /**
+     * 获取Lab实例
+     * 获取单例Lab实例
+     * @param context 上下文
+     * @return Lab实例
+     * @since 1.0
+     */
     public static Lab getLab(Context context){
         if (sLab == null){
             sLab =  new Lab(context);
@@ -48,11 +52,23 @@ public class Lab {
         return sLab;
     }
 
-    //sequence字段：1表示正序，2表示逆序，0表示无序
+
+    /**
+     * 获取菜单
+     * 根据条件搜索数据库，返回菜单列表。
+     * @param whereClause 键数组，与每个键与值数组相对应
+     * @param whereArgs 值数组
+     * @param order 排序字段1
+     * @param sequence 1表示正序，2表示逆序，0表示无序
+     * @param order1 排序字段2
+     * @param sequence1 1表示正序，2表示逆序，0表示无序
+     * @param handler 传递消息的Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public void getGoodsList(String[] whereClause, Object[] whereArgs,
                                         String order, int sequence,String order1,int sequence1,
                              final Handler handler, final int what){
-        //final List<GoodsData> goodsList = new ArrayList<>();
 
         BmobQuery<GoodsData> query = new BmobQuery<>();
         for (int i = 0;i < whereClause.length;i++){
@@ -87,6 +103,15 @@ public class Lab {
 
     }
 
+    /**
+     * 获取商家名
+     * 根据餐厅，获取商家名
+     * @param what 键
+     * @param value 值
+     * @param handler 传递消息的Handler
+     * @param tag 标记
+     * @since 1.0
+     */
     public void getBoss(String what, String value, final Handler handler, final int tag){
         BmobQuery<LoginTable> query = new BmobQuery<>();
         query.addWhereEqualTo(what,value);
@@ -102,7 +127,17 @@ public class Lab {
         });
     }
 
-    //condition为TRUE表示大于查询，否则相反。数组第一项为主键，一次只能比较一个字段
+
+    /**
+     * 比较查询
+     * 根据条件，进行比较查询，where数组第一项为主键，一次只能比较一个字段
+     * @param where 键
+     * @param values 值
+     * @param condition 为TRUE表示大于查询，否则相反
+     * @param handler 传递消息的Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public void doConditionQuery(String[] where, Object[] values, boolean condition,
                                  final Handler handler, final int what){
         BmobQuery<GoodsData> query = new BmobQuery<>();
@@ -126,7 +161,23 @@ public class Lab {
 
     }
 
-    //不是封面图片的，coverNum字段为-1，否则为对应的位置
+    /**
+     * 插入数据
+     * 往数据中插入信息
+     * @param context 上下文
+     * @param user 商家名
+     * @param foodName 食品
+     * @param imageUrl 图片地址
+     * @param saveVolume 销量
+     * @param price 价格
+     * @param positive 好评数
+     * @param negative 差评数
+     * @param description 描述
+     * @param stock 是否有货
+     * @param classify 分类
+     * @param coverNum 不是封面图片的，coverNum字段为-1，否则为对应的位置
+     * @since 1.0
+     */
     public void insertGoodsData(Context context,String user,String foodName,String imageUrl,Integer saveVolume,
                                 Double price,Integer positive,Integer negative,String description,
                                 Boolean stock,String classify,Integer coverNum){
@@ -183,6 +234,17 @@ public class Lab {
     }
 
     //数组一二项用来找出对应行的objectID,图片需要更新的话，需要放在数组最后一项。
+
+    /**
+     * 更新数据
+     * 先找出对应行的ObjectID，再进行更新操作
+     * @param context 上下文
+     * @param oldFoodName 旧食品名
+     * @param newFoodName 新食品名
+     * @param name 键数组，数组一二项用来找出对应行的objectID,图片需要更新的话，需要放在数组最后一项
+     * @param values 值数组
+     * @since 1.0
+     */
     public  void updateGoodsData(final Context context, final String oldFoodName,
                                  final String newFoodName, final String[] name, final Object[] values){
         //先通过条件查询objectId，再进行更操作
@@ -260,6 +322,16 @@ public class Lab {
         });
     }
 
+    /**
+     * 批量更新数据
+     * 批量更新操作
+     * @param context 上下文
+     * @param where 键数组
+     * @param values 值数组
+     * @param handler 传递消息的Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public void updateBatchGoodsData(final Context context, String[] where, final Object[] values,
                                      final Handler handler, final int what){
 
@@ -302,6 +374,17 @@ public class Lab {
 
     }
 
+    /**
+     * 删除数据
+     * 先找出对应行的ObjectID，再进行删除操作
+     * @param context 上下文
+     * @param name 键数组
+     * @param values 值数组
+     * @param handler 传递消息的Handler
+     * @param what 标记
+     * @param hasProgressDialog 是否开启进度窗口
+     * @since 1.0
+     */
     public void deleteGoodsData(Context context, String[] name, Object[] values,
                                 final Handler handler, final int what, final boolean hasProgressDialog){
         final ProgressDialog dialog = createHorizontalDialog("删除中，请稍后...",context);
@@ -351,6 +434,13 @@ public class Lab {
         });
     }
 
+    /**
+     * 更新销量
+     * 先找出对应行的ObjectID，再更新
+     * @param boss 商家名
+     * @param foodName 食品名
+     * @since 1.0
+     */
     public void updateVolume(String boss,String foodName){
         BmobQuery<GoodsData> query = new BmobQuery<>();
         query.addWhereEqualTo("User",boss);
@@ -375,6 +465,14 @@ public class Lab {
         });
     }
 
+    /**
+     * 更新好评或差评数
+     * 先找出对应行的ObjectID，再更新
+     * @param boss 商家名
+     * @param food 食品名
+     * @param what 更新数
+     * @since 1.0
+     */
     public void updateGoodOrBad(String boss, String food, final String what){
         BmobQuery<GoodsData> query = new BmobQuery<>();
         query.addWhereEqualTo("User",boss);
@@ -400,6 +498,13 @@ public class Lab {
         });
     }
 
+    /**
+     * 开启进度窗口
+     * @param tip 提示
+     * @param context 上下文
+     * @return 窗口ProgressDialog
+     * @since 1.0
+     */
     public ProgressDialog createDialog(String tip,Context context){
         ProgressDialog dialog;
         dialog = new ProgressDialog(context);
@@ -411,6 +516,13 @@ public class Lab {
         return dialog;
     }
 
+    /**
+     * 开启水平进度窗口
+     * @param tip 提示
+     * @param context 上下文
+     * @return 窗口ProgressDialog
+     * @since 1.0
+     */
     public ProgressDialog createHorizontalDialog(String tip,Context context){
         ProgressDialog dialog;
         dialog = new ProgressDialog(context);

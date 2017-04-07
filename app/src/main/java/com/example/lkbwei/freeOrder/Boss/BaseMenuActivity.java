@@ -30,38 +30,42 @@ import java.util.List;
  */
 
 public class BaseMenuActivity extends FragmentActivity {
-    private FragmentTabHost mTabHost;
-    private OrderTableLab mOrderTableLab;
-    private List<OrderItem> mOrderItemList;
 
     public static Handler sHandler;
     public static String mCurrentRestaurant;
     public static int identity;
-
     public static final int BOSS = 1;
     public static final int CUSTOMER = 2;
-
     public static final int UPDATE = 1;
     public static final int STOP = 2;
     public static final int START = 3;
     public static final int SAVE_ORDER_LIST = 4;
-
     public static final String IDENTITY = "identity";
 
+    private FragmentTabHost mTabHost;
+    private OrderTableLab mOrderTableLab;
+    private List<OrderItem> mOrderItemList;
+
+    /**
+     * 新建Intent
+     * 创建一个跳转至本Activity的Intent
+     * @param context 上下文
+     * @param identity 身份
+     * @return Intent
+     * @since 1.0
+     */
     public static Intent newIntent(Context context, int identity){
         Intent intent = new Intent(context,BaseMenuActivity.class);
         intent.putExtra(IDENTITY,identity);
         return intent;
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_tab);
 
-        mOrderTableLab = OrderTableLab.getmOrderTableLab(this);
+        mOrderTableLab = OrderTableLab.getOrderTableLab(this);
         mOrderItemList = new ArrayList<>();
         identity = getIntent().getIntExtra(IDENTITY,0);
         mCurrentRestaurant = BasePreferences.getRESTAURANT(this);
@@ -143,13 +147,17 @@ public class BaseMenuActivity extends FragmentActivity {
         };
     }
 
+    /**
+     * 返回订单列表
+     * @return 订单列表
+     * @since 1.0
+     */
     public List<OrderItem> getOrderItemList(){
         return mOrderItemList;
     }
 
     @Override
     public void onDestroy(){
-
         super.onDestroy();
         Intent i = PollService.newIntent(this);
         this.stopService(i);

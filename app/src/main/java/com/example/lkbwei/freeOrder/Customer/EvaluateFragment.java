@@ -32,6 +32,10 @@ import java.util.List;
  */
 
 public class EvaluateFragment extends Fragment {
+
+    public static final int GET_DATA = 0;
+    public static final int INSERT_COMMENT = 1;
+    public static final int UPDATE_STATUS = 2;
     public static final String TAG = "evaluateFragment";
 
     private List<EvaluateItem> mList;
@@ -42,12 +46,6 @@ public class EvaluateFragment extends Fragment {
     private String customer;
     private String boss;
     private Lab mLab;
-
-
-    public static final int GET_DATA = 0;
-    public static final int INSERT_COMMENT = 1;
-    public static final int UPDATE_STATUS = 2;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -62,7 +60,7 @@ public class EvaluateFragment extends Fragment {
         customer = BasePreferences.getUserName(getActivity());
         boss = BasePreferences.getRecentRestaurant(getActivity());
         initHandler();
-        mOrderTableLab = OrderTableLab.getmOrderTableLab(getActivity());
+        mOrderTableLab = OrderTableLab.getOrderTableLab(getActivity());
         mLab = Lab.getLab(getActivity());
 
         getData();
@@ -78,12 +76,20 @@ public class EvaluateFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 获取数据
+     * @since 1.0
+     */
     public void getData(){
         OvalProgress.startAnimator(getActivity());
         mOrderTableLab.getEvaluateData(customer,OrderTableLab.HAVE_SOLVE,mHandler,GET_DATA);
     }
 
-
+    /**
+     * 更新列表
+     * @param list 数据
+     * @sicne 1.0
+     */
     public void updateRecyclerView(List<OrderTable> list){
 
         if (list.size() == 0){

@@ -30,6 +30,7 @@ import java.util.Set;
 
 
 /**
+ * 登录入口
  * Created by lkbwei on 2017/3/4.
  */
 
@@ -52,9 +53,14 @@ public class LoginActivity extends BaseLoginActivity{
         super.onResume();
         mLoginPresenter = new LoginPresenter();
         mLoginPresenter.attachView(this);
-
     }
 
+    /**
+     *初始化网络监听
+     * 继承父类方法，当是免登录界面时开启监听，网络可用时进入主界面
+     * @see NetReceiver
+     * @since 1.0
+     */
     @Override
     public void initReceiver(){
         mNetReceiver = new NetReceiver(mHandler);
@@ -63,27 +69,60 @@ public class LoginActivity extends BaseLoginActivity{
         registerReceiver(mNetReceiver,intentFilter);
     }
 
+    /**
+     * 登录
+     * 继承父类方法，实现登录验证工作
+     * @param user 用户名
+     * @param pwd 密码
+     * @param identity 身份
+     * @see LoginPresenter
+     * @since 1.0
+     */
     @Override
     public void login(String user, final String pwd, final int identity) {
         mLoginPresenter.login(user,pwd,identity,mHandler,LOGIN);
     }
 
+    /**
+     * 注册
+     * 继承父类方法，实现注册逻辑
+     * @see LoginPresenter
+     * @since 1.0
+     */
     @Override
     public void register() {
-
         mLoginPresenter.register();
     }
 
+    /**
+     * 注册窗口
+     * 继承父类方法，弹出注册窗口，用户输入后，继续注册操作
+     * @param user 用户名
+     * @param pwd 密码
+     * @param identity 身份
+     * @see LoginPresenter
+     * @since 1.0
+     */
     @Override
     public void doRegister(final String user, final String pwd, final int identity) {
         mLoginPresenter.doRegister(user,pwd,identity,mHandler,REGISTERDIOLOG);
     }
 
+    /**
+     * 进入主界面
+     * 登录验证完成，进入主界面
+     * @since 1.0
+     */
     @Override
     public void success() {
         mHandler.sendEmptyMessage(LOGIN);
     }
 
+    /**
+     * 注册餐厅
+     * 当商家第一次登录时，需要先注册餐厅
+     * @since 1.0
+     */
     @Override
     public void editRestaurant() {
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -101,6 +140,11 @@ public class LoginActivity extends BaseLoginActivity{
                         }).create().show();
     }
 
+    /**
+     * 选择餐厅
+     * 当用户第一次登录时，需要先选择餐厅
+     * @since 1.0
+     */
     @Override
     public void chooseRestaurant() {
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -144,6 +188,13 @@ public class LoginActivity extends BaseLoginActivity{
         });
     }
 
+    /**
+     * 验证餐厅
+     * 商家注册餐厅后，验证是否合法
+     * @param restaurant 餐厅名
+     * @return 是否符合
+     * @since 1.0
+     */
     @Override
     public boolean checkRestaurant(String restaurant) {
         if (mRestaurantList.contains(restaurant)){
@@ -153,7 +204,6 @@ public class LoginActivity extends BaseLoginActivity{
             return false;
         }
     }
-
 
     public void handleMsg(){
         mHandler = new Handler(){

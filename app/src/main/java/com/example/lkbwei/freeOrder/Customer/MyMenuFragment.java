@@ -32,6 +32,13 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class MyMenuFragment extends Fragment {
+
+    public static final int IMAGE_CUT_CODE = 0;
+    public static final int CAMERA_CODE = 1;
+    public static final int IMAGE_CUT_CAMERA_CODE = 2;
+    public static final int UPLOAD_IMAGE = 3;
+    public static final int GET_IMAGE = 4;
+
     protected TextView mTip;
     protected RelativeLayout mEvaluate;
     protected RelativeLayout mAllOrder;
@@ -39,14 +46,6 @@ public class MyMenuFragment extends Fragment {
     protected ImageView editImage;
     protected TextView mUserName;
     protected Handler mHandler;
-
-    public static final int IMAGE_CUT_CODE = 0;
-    public static final int CAMERA_CODE = 1;
-    public static final int IMAGE_CUT_CAMERA_CODE = 2;
-
-    public static final int UPLOAD_IMAGE = 3;
-    public static final int GET_IMAGE = 4;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -106,27 +105,49 @@ public class MyMenuFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 获取用户头像
+     * @since 1.0
+     */
     public void getUserImage(){
         DbOperate.getUserImage(BasePreferences.getUserName(getActivity()),
                 mHandler,GET_IMAGE);
     }
 
+    /**
+     * 更新用户头像
+     * @param url Url
+     * @since 1.0
+     */
     public void updateImageFromNet(String url){
         Picasso.with(getActivity())
                 .load(url)
                 .into(editImage);
     }
 
+    /**
+     * 设置用户名
+     * @since 1.0
+     */
     public void initUserName(){
         String name = BasePreferences.getUserName(getActivity());
         mUserName.setText(name);
     }
 
+    /**
+     * 上传头像
+     * @param file 本地图片地址
+     * @since 1.0
+     */
     public void uploadImage(File file){
         String name = BasePreferences.getUserName(getActivity());
         DbOperate.setUserImage(name,file,mHandler,UPLOAD_IMAGE);
     }
 
+    /**
+     * 设置头像操作
+     * @since 1.0
+     */
     public void doEditImage(){
         editImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +201,10 @@ public class MyMenuFragment extends Fragment {
         }
     }
 
+    /**
+     * 更新头像
+     * @since 1.0
+     */
     public void updateImage(){
         File file = LoadImage.getUserImageFile(getActivity());
         uploadImage(file);

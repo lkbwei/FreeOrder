@@ -19,20 +19,24 @@ import com.example.lkbwei.freeOrder.Tools.UseProgressBar;
 import com.squareup.picasso.Picasso;
 
 /**
+ * 免登录界面实现
  * Created by lkbwei on 2017/3/4.
  */
 
 public class WelcomeFragment extends Fragment {
-    private static final String SUCCESS = "登录成功";
 
+    private static final int GET_IMAGE = 0;
+    private static final String SUCCESS = "登录成功";
     private Handler mHandler;
     private ImageView mUserImageView;
     private TextView mUserName;
     private UseProgressBar progressBar;
     private boolean haveGetImage;
 
-    private static final int GET_IMAGE = 0;
-
+    /**
+     * 登录成功监听器，具体由Activity实现
+     * @since 1.0
+     */
     public interface WelcomeListener{
         void success();
     }
@@ -47,6 +51,11 @@ public class WelcomeFragment extends Fragment {
         super.onStop();
     }
 
+    /**
+     * 新建WelcomeFragment实例
+     * @return WelcomeFragment实例
+     * @since 1.0
+     */
     public static Fragment newInstance(){
         return new WelcomeFragment();
     }
@@ -87,6 +96,11 @@ public class WelcomeFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 获取用户头像
+     * 联网获取用户头像
+     * @since 1.0
+     */
     public void getUserImage(){
         if (!haveGetImage) {
             DbOperate.getUserImage(BasePreferences.getUserName(getActivity()),
@@ -94,6 +108,12 @@ public class WelcomeFragment extends Fragment {
         }
     }
 
+    /**
+     * 更新头像
+     * 联网获取头像后，更新头像
+     * @param url 图片Url
+     * @since 1.0
+     */
     public void updateImageFromNet(String url){
         Picasso.with(getActivity())
                 .load(url)
@@ -108,6 +128,11 @@ public class WelcomeFragment extends Fragment {
         }
     }
 
+    /**
+     * 更新用户名
+     * 从SharePreference中获取用户名
+     * @since 1.0
+     */
     public void initUserName(){
         String name = BasePreferences.getUserName(getActivity());
         mUserName.setText(name);

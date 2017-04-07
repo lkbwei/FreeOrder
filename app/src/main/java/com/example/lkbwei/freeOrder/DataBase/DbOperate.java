@@ -31,6 +31,17 @@ import cn.bmob.v3.listener.UploadFileListener;
 public class DbOperate  {
     private static String[] objectID = new String[1];
 
+    /**
+     * 联网登录验证
+     * 根据用户输入信息，从数据库中验证信息正确性
+     * @param context 上下文
+     * @param user 用户名
+     * @param pwd 密码
+     * @param identity 身份
+     * @param handler 传递消息Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public static void login(final Context context, final String user, final String pwd, final int identity,
                              final Handler handler, final int what){
         boolean isOn = NetReceiver.checkNetConn(context);
@@ -75,9 +86,19 @@ public class DbOperate  {
 
     }
 
+    /**
+     * 注册逻辑
+     * 根据用户输入信息，完成注册逻辑
+     * @param context 上下文
+     * @param user 用户名
+     * @param pwd 密码
+     * @param identity 身份
+     * @param handler 传递消息Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public static void doRegister(final Context context, final String user
             , final String pwd, final int identity,final Handler handler,final int what) {
-        Log.i("login","*********************" + user + "%%%%%%%%%%%%%%" + pwd);
         if (user == null || pwd == null || (pwd.length() < 8) || (user.length() < 3)) {
             Toast.makeText(context,"格式不正确，请重新输入",Toast.LENGTH_LONG).show();
             handler.sendEmptyMessage(what);
@@ -112,6 +133,13 @@ public class DbOperate  {
         }
     }
 
+    /**
+     * 获取全部餐厅
+     * 从数据库中获取全部餐厅名
+     * @param handler 传递消息的Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public static void getAllRestaurant(final Handler handler, final int what){
         BmobQuery<LoginTable> query = new BmobQuery<>();
         query.addWhereEqualTo("identity",BaseLoginActivity.BOSS);
@@ -130,6 +158,13 @@ public class DbOperate  {
         });
     }
 
+    /**
+     * 验证餐厅合法
+     * 根据商家注册的餐厅名，从数据库中验证是否有重复
+     * @param name 餐厅名
+     * @param handler 传递消息的Handler
+     * @since 1.0
+     */
     public static void checkHaveRestaurant(String name,final Handler handler){
         BmobQuery<LoginTable> table = new BmobQuery<>();
 
@@ -154,6 +189,14 @@ public class DbOperate  {
                 });
     }
 
+    /**
+     * 注册餐厅
+     * 往数据库中写入商家餐厅
+     * @param context 上下文
+     * @param restaurant 餐厅名
+     * @param handler 传递消息的Handler
+     * @since 1.0
+     */
     public static void editRestaurant(final Context context, final String restaurant,
                                       final Handler handler){
         LoginTable table = new LoginTable();
@@ -173,6 +216,14 @@ public class DbOperate  {
         });
     }
 
+    /**
+     * 获取商家餐厅
+     * 根据具体商家名获取其对应餐厅名
+     * @param boss 商家名
+     * @param handler 传递消息的Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public static void getRestaurant(String boss, final Handler handler, final int what){
 
         BmobQuery<LoginTable> query = new BmobQuery<>();
@@ -190,7 +241,15 @@ public class DbOperate  {
         });
     }
 
-
+    /**
+     * 设置用户头像
+     * 根据用户名往数据库中添加用户头像
+     * @param user 用户名
+     * @param file 图片本地地址
+     * @param handler 传递消息的Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public static void setUserImage(final String user, File file, final Handler handler, final int what){
         final BmobFile bmobFile = new BmobFile(file);
         bmobFile.upload(new UploadFileListener() {
@@ -221,6 +280,14 @@ public class DbOperate  {
         });
     }
 
+    /**
+     * 获取用户头像
+     * 根据用户名往数据库中获取其头像
+     * @param user 用户名
+     * @param handler 传递消息的Handler
+     * @param what 标记
+     * @since 1.0
+     */
     public static void getUserImage(String user, final Handler handler, final int what){
         BmobQuery<LoginTable> query = new BmobQuery<>();
         query.addWhereEqualTo("userName",user);

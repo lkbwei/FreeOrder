@@ -10,6 +10,10 @@ import java.util.Set;
  */
 
 public class BasePreferences  {
+
+    public static final int BOSS = 1;
+    public static final int CUSTOMER = 2;
+
     private static final String OBJECT_ID = "id";
     private static final String USER_NAME = "name";
     private static final String USER_PWD = "password";
@@ -18,9 +22,6 @@ public class BasePreferences  {
     private static final String RESTAURANT = "restaurant";
     private static final String RECENT_RESTAURANT = "recentRestaurant";
     private static final String RESTAURANT_LIST = "list";
-
-    public static final int BOSS = 1;
-    public static final int CUSTOMER = 2;
 
     public static Set<String> getRestaurantList(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context)

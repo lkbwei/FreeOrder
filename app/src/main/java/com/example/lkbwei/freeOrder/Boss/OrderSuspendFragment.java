@@ -32,21 +32,23 @@ import java.util.List;
  */
 
 public class OrderSuspendFragment extends Fragment {
-    private List<SuspendItem> mList;
-    private RecyclerView mRecyclerView;
-    private OrderMenuAdapter mAdapter;
-    protected Handler mHandler;
-    protected OrderTableLab mOrderTableLab;
-    private Lab mLab;
-    private TextView emptyView;
-    protected String mBoss;
-    protected boolean showButton;
-    protected TextView mTip;
 
     public static final int GET_DATA = 0;
     public static final int TAKE_ORDER = 1;
     public static final int HAVE_SOLVE = 2;
     public static final int ORDER_STATUS_DOWN = 3;//恢复订单状态时使用
+
+    protected String mBoss;
+    protected boolean showButton;
+    protected TextView mTip;
+    protected Handler mHandler;
+    protected OrderTableLab mOrderTableLab;
+
+    private List<SuspendItem> mList;
+    private RecyclerView mRecyclerView;
+    private OrderMenuAdapter mAdapter;
+    private Lab mLab;
+    private TextView emptyView;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -60,13 +62,12 @@ public class OrderSuspendFragment extends Fragment {
         mTip = (TextView)view.findViewById(R.id.card_text);
         setTip();
         mBoss = BasePreferences.getUserName(getActivity());
-        mOrderTableLab = OrderTableLab.getmOrderTableLab(getActivity());
+        mOrderTableLab = OrderTableLab.getOrderTableLab(getActivity());
         mLab = Lab.getLab(getActivity());
         initHandler();
 
         getData();
         mList = new ArrayList<>();
-
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.order_recyclerview);
         mAdapter = new OrderMenuAdapter(getActivity(),mList);

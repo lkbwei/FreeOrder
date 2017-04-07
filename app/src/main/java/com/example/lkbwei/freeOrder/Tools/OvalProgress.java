@@ -17,6 +17,11 @@ import com.example.lkbwei.freeOrder.R;
 public class OvalProgress {
     private static AlertDialog mAlertDialog;
 
+    /**
+     * 开启动画
+     * @param context 上下文
+     * @since 1.0
+     */
     public static void startAnimator(Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -58,6 +63,10 @@ public class OvalProgress {
         set.start();
     }
 
+    /**
+     * 结束动画
+     * @since 1.0
+     */
     public static void endAnimator(){
         mAlertDialog.cancel();
     }

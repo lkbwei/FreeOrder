@@ -53,6 +53,20 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class FoodDescriptionFragment extends Fragment {
+
+    public Handler mHandler;
+    public RecyclerView mCommentRecyclerView;
+    public CommentAdapter mAdapter;
+    public List<CommentAdapter.CommentItem> mCommentList;
+    public static final String ARG = "arg";
+    public static final String TAG = "FoodDescriptionFragment";
+    public static final String SEND_CODE = "sendFromFoodDescription";
+    public static final String IS_COVER = "isCover";
+    public static final String IS_VIEW_PAGER_DATA = "isviewpagerdata";
+    public static final int FOOD_NAME_WHAT = 0;
+    public static final int UPDATE_FOOD_NAME = 1;
+    public static final int UPDATE_COMMENT = 2;
+
     private ImageView mImageView;//食物图
     private Button editImage;//编辑图片按钮
     private EditText editFoodName;//编辑菜名
@@ -69,30 +83,23 @@ public class FoodDescriptionFragment extends Fragment {
     private boolean isCover;
     private boolean isViewPagerData;
     private boolean imageHasChanged = false;
-    public Handler mHandler;
     private Lab mLab;
     private OrderTableLab mOrderTableLab;
     private boolean isNewGood = true;
     private String MarkFoodName = "";
     private ImageButton mGoodButton;
     private ImageButton mBadButton;
-    public RecyclerView mCommentRecyclerView;
-    public CommentAdapter mAdapter;
-    public List<CommentAdapter.CommentItem> mCommentList;
-
     private ArrayAdapter<String> mArrayAdapter;
     private List<String> mClassifyList;
 
-    public static final String ARG = "arg";
-    public static final String TAG = "FoodDescriptionFragment";
-    public static final String SEND_CODE = "sendFromFoodDescription";
-    public static final String IS_COVER = "isCover";
-    public static final String IS_VIEW_PAGER_DATA = "isviewpagerdata";
-
-    public static final int FOOD_NAME_WHAT = 0;
-    public static final int UPDATE_FOOD_NAME = 1;
-    public static final int UPDATE_COMMENT = 2;
-
+    /**
+     * 新建FoodDescriptionFragment实例
+     * @param CurrentSelect 目前选择的食品
+     * @param isCover 是否是封面
+     * @param isViewPagerData 是否是ViewPager方式打开
+     * @return FoodDescriptionFragment实例
+     * @since 1.0
+     */
     public static FoodDescriptionFragment newInstance(int CurrentSelect,boolean isCover,boolean isViewPagerData){
         FoodDescriptionFragment fragment = new FoodDescriptionFragment();
         Bundle argument = new Bundle();
@@ -136,7 +143,7 @@ public class FoodDescriptionFragment extends Fragment {
         mGoodButton = (ImageButton) view.findViewById(R.id.description_good);
         mBadButton = (ImageButton)view.findViewById(R.id.description_bad);
 
-        mOrderTableLab = OrderTableLab.getmOrderTableLab(getActivity());
+        mOrderTableLab = OrderTableLab.getOrderTableLab(getActivity());
         mCommentRecyclerView = (RecyclerView)view.findViewById(R.id.description_evaluate);
         initRecycler();
 
@@ -201,6 +208,10 @@ public class FoodDescriptionFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 初始化RecyclerView
+     * @since 1.0
+     */
     public void initRecycler(){
         mCommentList = new ArrayList<>();
         mAdapter = new CommentAdapter(getActivity(),mCommentList);
@@ -210,6 +221,11 @@ public class FoodDescriptionFragment extends Fragment {
         mCommentRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
     }
 
+    /**
+     * 获取评论
+     * @param food 食品名
+     * @since 1.0
+     */
     public void getComment(String food){
         String boss = null;
         if (BaseMenuActivity.identity == BaseMenuActivity.BOSS){
@@ -220,6 +236,11 @@ public class FoodDescriptionFragment extends Fragment {
         mOrderTableLab.getComment(boss,food,mHandler,UPDATE_COMMENT);
     }
 
+    /**
+     * 更新评论
+     * @param list 订单列表
+     * @since 1.0
+     */
     public void updateComment(List<OrderTable> list){
         List<CommentAdapter.CommentItem> itemList = new ArrayList<>();
         for (int i = 0;i < list.size();i++){
@@ -233,6 +254,11 @@ public class FoodDescriptionFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * 初始数据
+     * @param data 数据
+     * @since 1.0
+     */
     public void initData(GoodsData data){
         Picasso.with(getActivity())
                 .load(data.getImageUrl())
@@ -251,6 +277,10 @@ public class FoodDescriptionFragment extends Fragment {
         getComment(MarkFoodName);
     }
 
+    /**
+     * 设置图片的监听
+     * @since 1.0
+     */
     public void doEditImage(){
         editImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -288,7 +318,10 @@ public class FoodDescriptionFragment extends Fragment {
 
     }
 
-
+    /**
+     * 分类选择器的设置
+     * @since 1.0
+     */
     public void doClassifySpinner(){
 
         mArrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,
@@ -308,6 +341,10 @@ public class FoodDescriptionFragment extends Fragment {
         });
     }
 
+    /**
+     * 保存按钮监听
+     * @since 1.0
+     */
     public void doSaveVerify(){
         //正则表达式判断价格是否为数字
         Pattern pattern = Pattern.compile("\\d{1,8}(\\.\\d{1,2})?$");
@@ -326,6 +363,10 @@ public class FoodDescriptionFragment extends Fragment {
         }
     }
 
+    /**
+     * 更新验证
+     * @since 1.0
+     */
     public void doUpdateVerify(){
         Pattern pattern = Pattern.compile("\\d{1,8}(\\.\\d{1,2})?$");
         Matcher isNum = pattern.matcher(price.getText().toString());
@@ -341,6 +382,10 @@ public class FoodDescriptionFragment extends Fragment {
         }
     }
 
+    /**
+     * 保存操作
+     * @since 1.0
+     */
     public void save(){
         String user = BasePreferences.getUserName(getActivity());
         String foodName = editFoodName.getText().toString();
@@ -362,6 +407,10 @@ public class FoodDescriptionFragment extends Fragment {
                 goodDescription, stock, classify, coverNum);
     }
 
+    /**
+     * 更新操作
+     * @since 1.0
+     */
     public void update(){
         String user = BasePreferences.getUserName(getActivity());
         String foodName = editFoodName.getText().toString();
@@ -425,6 +474,10 @@ public class FoodDescriptionFragment extends Fragment {
         }
     }
 
+    /**
+     * 更新图片
+     * @since 1.0
+     */
     public void updateImage(){
         Bitmap bitmap = null;
         Uri uri = LoadImage.getTempFileDir(getActivity());
@@ -440,7 +493,12 @@ public class FoodDescriptionFragment extends Fragment {
         }
     }
 
-    //更新MenuListFragment
+    /**
+     * 更新MenuListFragment
+     * @param resultCode 结果代码
+     * @param code 标记
+     * @since 1.0
+     */
     public void sendResult(int resultCode, int code){
 
         Intent intent = new Intent();

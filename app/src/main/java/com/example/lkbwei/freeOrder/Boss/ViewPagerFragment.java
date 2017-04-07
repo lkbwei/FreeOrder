@@ -21,7 +21,12 @@ public class ViewPagerFragment extends Fragment {
     private static final String ARG = "arg";
     private String mUrl;
 
-
+    /**
+     * 新建ViewPagerFragment实例
+     * @param position 当前选择
+     * @return ViewPagerFragment实例
+     * @since 1.0
+     */
     public static Fragment newInstance(int position){
         Fragment fragment = new ViewPagerFragment();
         Bundle argument = new Bundle();

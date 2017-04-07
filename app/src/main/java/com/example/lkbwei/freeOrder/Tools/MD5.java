@@ -10,6 +10,12 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5 {
 
+    /**
+     * 使用MD5加密
+     * @param info 原字符串
+     * @return 加密后的字符串
+     * @since 1.0
+     */
     public static String getMD5(String info)
     {
         try

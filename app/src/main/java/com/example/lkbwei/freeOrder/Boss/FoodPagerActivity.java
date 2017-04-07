@@ -21,19 +21,17 @@ import java.util.List;
  */
 
 public class FoodPagerActivity extends FragmentActivity {
+
     public ViewPager mViewPager;
-    private boolean isCover;
-    private boolean isViewPagerData;
     public static List<String> sList;
     public static Handler sHandler;
-
     public static final String CURRENTNUM = "currentFood";
     public static final String CLASSIFY = "classify";
     public static final String IS_COVER = "cover";
     public static final String IS_VIEW_PAGER_DATA = "viewpagerdata";
 
-    public static final int OPEN_PROGRESS = 0;
-
+    private boolean isCover;
+    private boolean isViewPagerData;
 
     //记录是否为封面
     public static Intent newIntent(Context context,int currentNum,

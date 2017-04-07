@@ -32,6 +32,13 @@ import java.util.List;
  */
 
 public class ClassifyFragment extends Fragment {
+
+    public static final String TAG = "ClassifyFragment";
+    public static final String KEY = "com.example.lkbwei.ClassifyFragment";
+    public static final String CLASSIFY_DATA = "com.example.lkbwei.ClassifyFragment.List";
+    public static final int DELETE = 0;
+    public static final int SAVE_SUCCESS = 1;
+
     private List<String> mList;
     private List<String> markList;
     private BaseRecyclerAdapter mAdapter;
@@ -44,12 +51,12 @@ public class ClassifyFragment extends Fragment {
     private int count = 0;
     private int allCount ;
 
-    public static final String TAG = "ClassifyFragment";
-    public static final String KEY = "com.example.lkbwei.ClassifyFragment";
-    public static final String CLASSIFY_DATA = "com.example.lkbwei.ClassifyFragment.List";
-    public static final int DELETE = 0;
-    public static final int SAVE_SUCCESS = 1;
-
+    /**
+     * 新建ClassifyFragment实例
+     * @param list 保存的数据
+     * @return ClassifyFragment
+     * @since 1.0
+     */
     public static ClassifyFragment newInstance(List<String> list){
         ClassifyFragment fragment = new ClassifyFragment();
         Bundle argument = new Bundle();
@@ -119,9 +126,11 @@ public class ClassifyFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 退出
+     * @since 1.0
+     */
     public void quit(){
-        //sendResult(Activity.RESULT_OK, mList);
-
         MenuListFragment.sHandler.obtainMessage(MenuListFragment.UPDATE_DATA).sendToTarget();
         getFragmentManager().popBackStack(null, 0);
     }

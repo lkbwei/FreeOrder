@@ -19,33 +19,45 @@ import com.example.lkbwei.freeOrder.R;
 
 
 /**
+ * 登录界面实现
  * Created by lkbwei on 2017/3/4.
  */
 
 public class LoginFragment extends Fragment {
+
+    public static Handler sHandler;
+    public static final int LOGIN_NOT_SUCCESS = 1;
+    public static final int NET_STATUS = 2;
+
     private EditText user;
     private EditText pwd;
     private Button bossLogin;
     private Button customerLogin;
     private TextView register;
-    private LoginListener mLoginListener;
-    private RegisterListener mRegisterListener;
     private ImageView mProgress;
-    public static Handler sHandler;
     private AnimatorSet set;
 
-    public static final int LOGIN = 0;
-    public static final int LOGIN_NOT_SUCCESS = 1;
-    public static final int NET_STATUS = 2;
-
+    /**
+     * 注册监听器，具体由Activity实现
+     * @since 1.0
+     */
     public interface RegisterListener{
         void register();
     }
 
+    /**
+     * 登录监听器，具体由Activity实现
+     * @since 1.0
+     */
     public interface LoginListener{
         void login(String user,String pwd, int identity);
     }
 
+    /**
+     * 新建LoginFragment实例
+     * @return LoginFragment实例
+     * @since 1.0
+     */
     public static Fragment newInstance(){
         return new LoginFragment();
     }
@@ -132,10 +144,20 @@ public class LoginFragment extends Fragment {
         };
     }
 
+    /**
+     * 开启动画
+     * 开启登录动画
+     * @since 1.0
+     */
     public void login(){
         startAnimator();
     }
 
+    /**
+     * 登录失败
+     * 登录失败的处理
+     * @since 1.0
+     */
     public void loginFailed(){
         set.end();
         mProgress.setVisibility(View.INVISIBLE);
@@ -146,6 +168,11 @@ public class LoginFragment extends Fragment {
         register.setEnabled(true);
     }
 
+    /**
+     * 登录动画
+     * 登录动画实现
+     * @since 1.0
+     */
     public void startAnimator(){
         mProgress.setVisibility(View.VISIBLE);
         ObjectAnimator animator = ObjectAnimator.ofFloat(
